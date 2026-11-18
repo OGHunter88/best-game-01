@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emberfall Keep — a tower-defence game</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div id="app">
+  <header id="hud">
+    <div class="brand">🔥 Emberfall Keep</div>
+    <div class="hud-stat" title="Gold — earn it by stopping creatures"><span class="hud-label">Gold</span><span id="hud-gold">200g</span></div>
+    <div class="hud-stat" title="Crystal health — lose it all and the Keep falls"><span class="hud-label">Crystal</span><span id="hud-lives">❤ 20</span></div>
+    <div class="hud-stat"><span class="hud-label">Wave</span><span id="hud-wave">Wave 1/12</span></div>
+    <div class="hud-stat"><span class="hud-label">Score</span><span id="hud-score">0</span></div>
+    <div class="hud-stat"><span id="hud-enemies"></span></div>
+    <div class="hud-buttons">
+      <button id="btn-wave" type="button">⚔ Start Wave 1</button>
+      <button id="btn-speed" type="button">▶ 1×</button>
+      <button id="btn-pause" type="button">⏸ Pause</button>
+      <button id="btn-sound" type="button">🔊 Sound on</button>
+    </div>
+  </header>
+
+  <main id="board-row">
+    <div id="board-wrap">
+      <canvas id="game" width="1024" height="640" aria-label="Emberfall Keep: place towers beside the road to stop the creatures reaching the crystal"></canvas>
+      <p id="status" role="status" aria-live="polite"></p>
+      <div id="toast" aria-live="polite"></div>
+
+      <div id="overlay-title" class="overlay">
+        <div class="card">
+          <h1>🔥 Emberfall Keep</h1>
+          <p class="tagline">The horde is coming down the ember road. The crystal must not fall.</p>
+          <p>Build towers beside the road, stop <strong>12 waves</strong> of creatures, and keep the crystal alive.
+          Spark is fast, Frost slows the pack, Cannon bursts them apart. Upgrade what works, sell what does not.</p>
+          <button id="btn-start" type="button" class="big">⚔ Defend the Keep</button>
+          <button id="btn-howto" type="button" class="ghost">How to play</button>
+          <div id="howto">
+            <p><strong>Build:</strong> pick a tower (keys 1–3), click a glowing cell beside the road. Click a tower to upgrade or sell it.</p>
+            <p><strong>Waves:</strong> press Space or Start Wave when you are ready. Creatures that reach the crystal cost its health.</p>
+            <p><strong>Win:</strong> survive all 12 waves, including the Ash Golem. <strong>Lose:</strong> the crystal hits 0❤.</p>
+            <p><strong>Keys:</strong> 1/2/3 towers · Space start wave · P pause · F speed · M mute · R restart · Esc cancel.</p>
+          </div>
+          <p class="credit">An original game, built for make.fun's best-game-01 bounty.</p>
+        </div>
+      </div>
+
+      <div id="overlay-win" class="overlay hidden">
+        <div class="card">
+          <h1>🏆 The Keep stands!</h1>
+          <p class="tagline">Twelve waves, and the crystal still burns bright. The Ash Golem is ash.</p>
+          <p id="win-stats"></p>
+          <button id="btn-restart-win" type="button" class="big">↻ Play again</button>
+        </div>
+      </div>
+
+      <div id="overlay-lose" class="overlay hidden">
+        <div class="card">
+          <h1>💔 The crystal has fallen</h1>
+          <p class="tagline">The road is quiet now — too quiet. The horde will be back.</p>
+          <p id="lose-stats"></p>
+          <button id="btn-restart-lose" type="button" class="big">↻ Try again</button>
+        </div>
+      </div>
+
+      <div id="overlay-pause" class="overlay hidden">
+        <div class="card">
+          <h1>⏸ Paused</h1>
+          <p class="tagline">The horde waits. Take your time.</p>
+          <button id="btn-resume" type="button" class="big">▶ Resume</button>
+        </div>
+      </div>
+    </div>
+
+    <aside id="sidebar">
+      <h2>Build towers</h2>
+      <div id="shop"></div>
+      <div id="selected-panel" class="hidden">
+        <h3 id="sel-name"></h3>
+        <p id="sel-stats"></p>
+        <button id="btn-upgrade" type="button">⬆ Upgrade</button>
+        <button id="btn-sell" type="button">Sell</button>
+      </div>
+      <div class="tips">
+        <h3>Field notes</h3>
+        <ul>
+          <li>Frost first, then Cannon: slowed packs take the full blast.</li>
+          <li>Corners and long straights are worth the most — one tower covers more road.</li>
+          <li>Clearing a wave pays a bonus. Spend it before the next one.</li>
+          <li>Wave 12 brings the Ash Golem. Save something heavy for it.</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <footer id="hint">Click a tower, then a cell beside the road · 1/2/3 pick a tower · Space starts the wave · P pause · F speed · R restart</footer>
+</div>
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>
